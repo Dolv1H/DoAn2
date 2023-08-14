@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>ĐỒ ÁN 2</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="icon"
+        href="https://cdn.discordapp.com/attachments/1126402947148939284/1126404515520860211/smart-farm.png"
+        type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Alata' rel='stylesheet'>
+    <!-- <link rel="stylesheet" href="style.css">  -->
+
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: 'Alata';
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            /* Màu nền thiên nhiên */
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            align-items: center;
+        }
+
+        .dropdown-content {
+            background-color: inherit;
+            display: none;
+            position: fixed;
+            min-width: 210px;
+            min-height: 103px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            font-size: 100%;
+            left: 0;
+            z-index: 1;
+
+        }
+
+        #one:hover,
+        #two:hover,
+        #three:hover,
+        #four:hover,
+        #five:hover {
+            color: #0EF6CC;
+            background-color: #3A4F50;
+            >
+        }
+
+        header {
+            background-color: #65bb72;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .sensor-data {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            /* Màu nền cho phần dữ liệu cảm biến */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Hiệu ứng bóng cho khung */
+        }
+
+        .sensor-data div {
+            flex: 1;
+            text-align: center;
+        }
+
+        .status {
+            text-align: center;
+        }
+
+        footer {
+            background-color: #65bb72;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Hiển thị thông số môi trường và tưới tiêu tự động</h1>
+    </header>
+
+    <main>
+        <div class="sensor-data">
+            <div>
+                <h4>Nhiệt độ: <span style="color: red;" id="nhietdo">None</span> °C</h4>
+            </div>
+            <div>
+                <h4>Độ ẩm: <span style="color: blue;" id="doam">None</span> </h4>
+            </div>
+            <div>
+                <h4>Ánh sáng: <span style="color: rgb(51, 187, 112);" id="anhsang">None</span> lux</h4>
+            </div>
+        </div>
+
+        <div class="sensor-data">
+            <div>
+                <h4>Độ ẩm đất: <span style="color: rgb(58, 194, 204);" id="doamdat">None</span> %</h4>
+            </div>
+            <div>
+                <h4>Cảm biến mưa</h4>
+                <span id="rain">đang hoạt động</span>
+            </div>
+            <div>
+                <h4>Thời gian hiện tại</h4>
+                <p><span id="current-time"></span></p>
+            </div>
+        </div>
+
+        <div class="status">
+            <h4>Trạng thái hoạt động của máy bơm nước</h4>
+            <span id="maybom">Đang hoạt động</span>
+        </div>
+
+
+    </main>
+
+    <div class="dropdown"><span style="margin-top: -2vh;">Chọn chế độ</span><i class="material-icons"
+            id="arrow">arrow_drop_down</i><span id="cay"></span></div>
+    <div class="dropdown-content">
+        <div id="one">Tắt máy bơm</div>
+        <div id="two">Cây đậu xanh</div>
+        <div id="three">Cây cải</div>
+        <div id="four">Dưa hấu</div>
+        <div id="five">Cà chua</div>
+
+    </div>
+
+    <footer>
+        Đỗ Lê Việt Hoàng<br>Lê Công Bắc
+
+    </footer>
+
+
+    <script>
+        // Đoạn mã JavaScript để cập nhật thời gian hiện tại
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+
+            // Định dạng thời gian
+            if (hours < 10) hours = "0" + hours;
+            if (minutes < 10) minutes = "0" + minutes;
+
+            var timeString = hours + ":" + minutes;
+
+            // Cập nhật thẻ span có id="current-time" với thời gian mới
+            document.getElementById("current-time").textContent = timeString;
+
+            // Gọi lại hàm updateClock sau 1 giây
+            setTimeout(updateClock, 1000);
+        }
+
+        // Gọi hàm updateClock để bắt đầu cập nhật thời gian
+        updateClock();
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+    <script src="doan2.js"></script>
+</body>
+
+</html>
